@@ -5,12 +5,13 @@ import { AnotherComponent } from "./assign4/components/AnotherComponent";
 import { SampleComponent } from "./assign4/components/SampleComponent";
 import { ThemeProvider } from "./assign4/hooks/ThemeProvider";
 import { ProfileComponent } from "./assign5/ProfileComponent";
+import { TopPage } from "./assign6/top";
 
 function App() {
 
   return (
-    <>
-      <ProfileComponent />
+    < >
+      <TopPage/>
     </>
   )
 }
