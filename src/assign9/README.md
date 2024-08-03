@@ -1,0 +1,1 @@
+Create a Higher-Order Component that adds loading behavior to any component
