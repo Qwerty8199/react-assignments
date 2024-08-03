@@ -1,0 +1,1 @@
+Create a custom hook called useFetch that handles data fetching. The hook should manage loading and error states, and return the fetched data. Then, create a component that uses this hook to fetch and display data from a public API.
