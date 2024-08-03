@@ -6,12 +6,13 @@ import { SampleComponent } from "./assign4/components/SampleComponent";
 import { ThemeProvider } from "./assign4/hooks/ThemeProvider";
 import { ProfileComponent } from "./assign5/ProfileComponent";
 import { TopPage } from "./assign6/top";
+import { Assign9Page } from "./assign9/Assign9Page";
 
 function App() {
 
   return (
     < >
-      <TopPage/>
+      <Assign9Page/>
     </>
   )
 }
