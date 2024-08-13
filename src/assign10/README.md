@@ -1,0 +1,1 @@
+Build a list component with a search feature. Use React.memo to optimize the rendering of list items, and useMemo to memoize the filtered list based on the search term.
