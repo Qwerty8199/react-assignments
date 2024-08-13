@@ -1,4 +1,6 @@
 import { Counter } from "./assign1/Counter";
+import { Assign10Page } from "./assign10/Assign10Page";
+import { ThemeProvider10 } from "./assign10/ThemeHook";
 import { GetData } from "./assign2/GetPublicData";
 import { GetData3 } from "./assign3/GetData";
 import { AnotherComponent } from "./assign4/components/AnotherComponent";
@@ -12,7 +14,9 @@ function App() {
 
   return (
     < >
-      <Assign9Page/>
+    <ThemeProvider10>
+      <Assign10Page/>
+    </ThemeProvider10>
     </>
   )
 }
