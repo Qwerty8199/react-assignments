@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TaskContext, TaskDispatchContext } from "./TaskContext";
 
 
-export const TaskList = ({tasks, onChangeTask, onDeleteTask}) =>{
+export const TaskList = () =>{
+
+    const tasks = useContext(TaskContext);
 
     return(
         <ul >
@@ -9,7 +12,7 @@ export const TaskList = ({tasks, onChangeTask, onDeleteTask}) =>{
                 tasks.map(task => {
                     return(
                         <li key={task.id}>
-                        <Task task={task} onChange={onChangeTask} onDelete={onDeleteTask} />
+                        <Task task={task} />
                     </li>
                     )
                 })
@@ -18,14 +21,19 @@ export const TaskList = ({tasks, onChangeTask, onDeleteTask}) =>{
     );
 }
 
-export const Task = ( {task, onChange, onDelete} ) =>{
+export const Task = ({task}) =>{
 
+    const dispatch = useContext(TaskDispatchContext);
     const [isEdit, setIsEdit] = useState(false);
 
     let taskContent = isEdit ? 
     ( <>
         <input value={task.text}
-                onChange={ e=> {onChange({...task, text:e.target.value})}}
+                onChange={ e=> {        
+                    dispatch({
+                    type: 'changed',
+                    task: { ...task, text:e.target.value}
+                })}}
         />
         <button onClick={()=>setIsEdit(false)} className="px-2" > Save </button>
     </> ) 
@@ -40,10 +48,20 @@ export const Task = ( {task, onChange, onDelete} ) =>{
             <label>
                 <input type="checkbox" 
                         checked={task.done}
-                        onChange={e=>{onChange({...task,done:e.target.checked})}}
+                        onChange={e=>{        
+                                dispatch({
+                                type: 'changed',
+                                task: { ...task, done:e.target.checked}
+                            })}
+                        }
                         />
                 {taskContent}
-                <button onClick={()=>onDelete(task.id)} className="px-2">
+                <button onClick={()=>{
+                            dispatch({
+                            type: 'deleted',
+                            id: task.id
+                            });
+                        }} className="px-2">
                     Delete
                 </button>
             </label>
@@ -51,9 +69,12 @@ export const Task = ( {task, onChange, onDelete} ) =>{
     )
 }
 
-export const AddTask = ({onAddTask}) =>{
+export const AddTask = () =>{
 
     let [TaskText, setTaskText] = useState("")
+
+    const dispatch = useContext(TaskDispatchContext)
+
     return(
         <div>
             <input 
@@ -64,7 +85,11 @@ export const AddTask = ({onAddTask}) =>{
             />
             <button className="px-2" onClick={()=>{
                 setTaskText('')
-                onAddTask(TaskText)
+                dispatch({
+                    type : "add",
+                    id: nextId++,
+                    text: TaskText
+                });
             }}>
                 Add
             </button>
@@ -72,3 +97,5 @@ export const AddTask = ({onAddTask}) =>{
     )
 
 }
+
+let nextId = 3;

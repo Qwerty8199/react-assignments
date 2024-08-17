@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import { AddTask, TaskList } from "./TaskList";
+import { TaskContext, TaskDispatchContext } from "./TaskContext";
 
 let nextId = 3;
 const initialTasks = [
@@ -15,37 +16,35 @@ export const TaskApp = () =>{
         initialTasks
     );
 
-    const handleAddTask = (text) => {
-        dispatch({
-            type : "add",
-            id: nextId++,
-            text: text
-        });
-    }
+    // const handleAddTask = (text) => {
+    //     dispatch({
+    //         type : "add",
+    //         id: nextId++,
+    //         text: text
+    //     });
+    // }
 
-    const handleChangeTask = (task) => {
-        dispatch({
-            type: 'changed',
-            task: task
-        })
-    };
+    // const handleChangeTask = (task) => {
+    //     dispatch({
+    //         type: 'changed',
+    //         task: task
+    //     })
+    // };
 
-    const handleDeleteTask = (taskId) => {
-        dispatch({
-            type: 'deleted',
-            id: taskId
-        })
-    };
+    // const handleDeleteTask = (taskId) => {
+    //     dispatch({
+    //         type: 'deleted',
+    //         id: taskId
+    //     })
+    // };
 
     return(
-        <div>
-            <AddTask onAddTask={handleAddTask} />
-            <TaskList 
-                tasks={tasks}
-                onChangeTask={handleChangeTask}
-                onDeleteTask={handleDeleteTask}
-            />
-        </div>
+        <TaskContext.Provider value={tasks}>
+            <TaskDispatchContext.Provider value={dispatch}>
+                <AddTask />
+                <TaskList />
+            </TaskDispatchContext.Provider>
+        </TaskContext.Provider>
     )
 }
 
