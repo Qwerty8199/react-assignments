@@ -1,0 +1,1 @@
+Build a simple task management application using the Context API for global state management and useReducer for handling complex state logic. Include features like adding, toggling, and deleting tasks.
